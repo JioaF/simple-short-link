@@ -3,20 +3,32 @@
 <%- include('./components/header.ejs') %> 
 <body>
     <div class="container">
-        <h1><%= title %></h1>
+        <div class="title">
+            <h1><%= title %></h1>
+        </div>
 
         <form action="/" method="post">
             <div class="input-group">
-                <label for="">Link</label>
-                <input type="text" name="link" id=""><br>
+                <label for="link">Link</label>
+                <input type="text" name="link" id="link">
             </div>
             <div class="input-group">
-                <label for="">Masked link</label>
-                <input type="text" name="maskedLink" id=""><br>
+                <label for="masked">Masked link</label>
+                <input type="text" name="masked" id="masked">
             </div>
             <input type="submit" name="submit" value="Create">
         </form>
         
+        <% if(savedLink != null){ %>
+            <span>Your link</span><br>
+            <% for(let i = 0; i < savedLink.length; i++){%>
+                <% const key = savedLink.key(i) %>
+                <a href="/<%= key %>"><%= key %></a><br>
+            <% } %>
+        <% }else{ %>
+            <span>You dont have a local link</span>
+        <% } %>
+
     </div>
 </body>
 </html>
