@@ -2,33 +2,10 @@
 <html lang="en">
 <%- include('./components/header.ejs') %> 
 <body>
-    <div class="container">
-        <div class="title">
-            <h1><%= title %></h1>
+        <div class="container border border-black d-grip gap-2 mx-auto col-6">
+            <div class="mb-3 "><a href="/login" class="btn btn-primary">Login</a></div>
+            <div class="mb-3"><a href="/l" class="btn btn-primary">Create Local Link</a></div>
         </div>
-
-        <form action="/" method="post">
-            <div class="input-group">
-                <label for="link">Link</label>
-                <input type="text" name="link" id="link">
-            </div>
-            <div class="input-group">
-                <label for="masked">Masked link</label>
-                <input type="text" name="masked" id="masked">
-            </div>
-            <input type="submit" name="submit" value="Create">
-        </form>
-        
-        <% if(savedLink != null){ %>
-            <span>Your link</span><br>
-            <% for(let i = 0; i < savedLink.length; i++){%>
-                <% const key = savedLink.key(i) %>
-                <a href="/<%= key %>"><%= key %></a><br>
-            <% } %>
-        <% }else{ %>
-            <span>You dont have a local link</span>
-        <% } %>
-
-    </div>
+    <%- include('../views/components/footer.ejs') %> 
 </body>
 </html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./components/header.ejs') %>
+
+    <body>
+        <%- include('./components/navbar.ejs') %>
+            <div class="container mt-5 d-flex justify-content-center p-5">
+                <form action="/" method="post">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Original Link</span>
+                        <input type="text" name="link" id="link" class="form-control">
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="masked" class="input-group-text">Masked Link</label>
+                        <input type="text" name="masked" id="masked" class="form-control">
+                    </div>
+                    <input type="submit" name="submit" value="Create" class="btn btn-primary">
+                </form>
+            </div>
+
+            <% if(savedLink !=null){ %>
+                <span>Your link</span><br>
+                <% for(let i=0; i < savedLink.length; i++){%>
+                    <% const key=savedLink.key(i) %>
+                        <a href="/<%= key %>">
+                            <%= key %>
+                        </a><br>
+                        <% } %>
+            <% }else{ %>
+                <span>You dont have a local link</span>
+            <% } %>
+            <%- include('../views/components/footer.ejs') %>
+    </body>
+
+</html>
