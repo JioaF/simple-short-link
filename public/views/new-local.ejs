@@ -8,7 +8,7 @@
                 <form action="/" method="post">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Original Link</span>
-                        <input type="text" name="link" id="link" class="form-control">
+                        <input type="text" name="link" id="link" class="form-control" placeholder="https://www.google.com">
                     </div>
                     <div class="input-group mb-3">
                         <label for="masked" class="input-group-text">Masked Link</label>
@@ -18,7 +18,8 @@
                 </form>
             </div>
 
-            <% if(savedLink !=null){ %>
+            <% if(!loginStatus){ %> 
+            <% if(savedLink != null){ %>
                 <span>Your link</span><br>
                 <% for(let i=0; i < savedLink.length; i++){%>
                     <% const key=savedLink.key(i) %>
@@ -29,6 +30,7 @@
             <% }else{ %>
                 <span>You dont have a local link</span>
             <% } %>
+            <% } %> 
             <%- include('../views/components/footer.ejs') %>
     </body>
 

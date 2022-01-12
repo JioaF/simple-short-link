@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./components/header.ejs') %>
+
+    <body>
+        <%- include('./components/navbar.ejs') %>
+            <div class="container mt-5 d-flex justify-content-center p-5">
+                <div class="border border-dark p-5">
+                    <div class="mb-3">
+                        <% if(locals.fieldError.length> 0){ %>
+                            <% locals.fieldError.forEach((err)=>{ %>
+                                <div class="alert alert-danger">
+                                    <%= err %>
+                                </div>
+                                <% }) %>
+                        <% } %>
+                    </div>
+                <% if(input){ %> 
+                    <form action="/user/new" method="post">
+                        <div class="input-group mb-3">
+                            <label for="link" class="input-group-text">Url</label>
+                            <input type="text" name="link" id="link" class="form-control" placeholder="www.google.com">
+                        </div>
+                        <div class="input-group mb-3">
+                            <label for="label" class="input-group-text">Label</label>
+                            <input type="text" name="label" id="label" class="form-control">
+                        </div>
+                        <input type="submit" name="submit" value="Create" class="btn btn-primary">
+                    </form>
+                <% }else{ %>
+                    <form action="/user/edit/<%= links.id %>" method="post">
+                        <div class="input-group mb-3">
+                            <label for="link" class="input-group-text">Url</label>
+                            <input type="text" name="link" id="link" class="form-control" value="<%= links.url %>">
+                        </div>
+                        <div class="input-group mb-3">
+                            <label for="label" class="input-group-text">Label</label>
+                            <input type="text" name="label" id="label" class="form-control" value="<%= links.label  %>">
+                        </div>
+                        <input type="submit" name="submit" value="Update" class="btn btn-primary">
+                    </form>
+                <% } %> 
+            </div>
+            <%- include('../views/components/footer.ejs') %>
+    </body>
+
+</html>

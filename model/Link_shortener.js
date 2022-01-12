@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const conn = require('../config/database');
 
 
-const User = conn.define('users', {
+const Users = conn.define('users', {
     username: {
         type: Sequelize.DataTypes.STRING
     },
@@ -11,4 +11,16 @@ const User = conn.define('users', {
     },
 });
 
-module.exports = User;
+const Links = conn.define('userLinks', {
+    userId: {
+        type: Sequelize.DataTypes.INTEGER
+    },
+    url: {
+        type: Sequelize.DataTypes.TEXT
+    },
+    label: {
+        type: Sequelize.DataTypes.STRING
+    }    
+})
+
+module.exports = {Users, Links};

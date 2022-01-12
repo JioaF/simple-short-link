@@ -1,9 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('./components/header.ejs') %>
-<body>
-    <%- include('./components/navbar.ejs') %>
-    
+  <%- include('./components/header.ejs') %>
+
+  <body>
+      <%- include('./components/navbar.ejs') %>
+      <div class="container mt-5 p-4">
+        <a href="/user/new" class="btn btn-success">Create new shotlink</a>
+      <table class="table table-striped text-center">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Url</th>
+            <th>Links</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(linkResult.length> 0){ %> 
+            <% let no=1; %>
+            <%linkResult.forEach(link=> { %>
+            <tr>
+              <td><%= no++ %></td>
+              <td><%= link.url %></td>
+              <td><a href="<%= link.url %>"><%= link.label %></a></td>
+              <td>
+                <div class="text-center">
+                  <a href="/user/edit/<%= link.id %>" class="btn btn-info">Edit</a>
+                  <a href="/user/delete/<%= link.id %>" class="btn btn-danger" onclick="return confirm('Are you Sure?')">Delete</a>
+                </div>
+            </td>
+            </tr>
+            <% }) %> 
+            <% }else{ %>
+              <tr>
+                <td class="text-center" colspan="3">
+                  You dont have any shortlink created
+                </td>
+              </tr>
+              <% } %>
+        </tbody>
+      </table>
+    </div>
     <%- include('./components/footer.ejs') %>
-</body>
+  </body>
 </html>

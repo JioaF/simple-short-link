@@ -6,7 +6,7 @@ const localStorage = new LocalStorage('../scratch');
 router.route('/:shortlink?').get((req, res) => {
         const sl = req.params.shortLink;
         if (sl === undefined) {
-            res.render('new.ejs', { savedLink: localStorage });
+            res.render('new-local', { savedLink: localStorage });
         } else {
             console.log(`Redirected to https://${localStorage.getItem(`${sl}`)}`);
             res.redirect(`https://${localStorage.getItem(`${sl}`)}`);
