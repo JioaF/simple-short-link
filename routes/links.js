@@ -1,22 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const LocalStorage = require('node-localstorage').LocalStorage;
-const localStorage = new LocalStorage('../scratch');
+const { Links } = require('../model/Link_shortener');
 
 router.route('/:shortlink?').get((req, res) => {
-        const sl = req.params.shortLink;
+        const sl = req.params.shortlink;
         if (sl === undefined) {
-            res.render('new-local', { savedLink: localStorage });
+            res.send("URL shortener root/protocol");
         } else {
-            console.log(`Redirected to https://${localStorage.getItem(`${sl}`)}`);
-            res.redirect(`https://${localStorage.getItem(`${sl}`)}`);
-            res.end();
+            Links.findAll({
+            where: {
+                    label: sl,       
+                }
+            }).then(result => {
+                res.redirect(`https://${result[0].url}`);
+            }).catch(err => {
+                res.send("URL not found or not registered yet");
+                res.status(404);
+                res.end();
+            })
         }
-    }).post((req, res) => {
-        const { link, masked } = req.body;
-        localStorage.setItem(`${masked}`, `${link}`);
-        res.redirect('/');
-        
-    });
+       
+    })
 
 module.exports = router; 
