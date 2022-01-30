@@ -1,2 +1,4 @@
-# simple-short-link
-For creating a short link
+# Simple-shortlink
+A website in development on an attempt to combine
+link shortener and linktree
+
